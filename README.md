@@ -16,3 +16,7 @@ The default directory for install is ~/.torjail
 You can install the script wherever you want providing you keep the associated files.
 
 **License:** MIT
+
+## screenshot
+
+![](https://raw.githubusercontent.com/equk/torjail/master/screenshot.jpg)
