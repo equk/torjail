@@ -102,7 +102,7 @@ on update
     [ WARN ] updating to: 5.0.7
     [ OK ] creating torjail base folder at ~/.torjail
 
-## notes:
+## notes
 
 Once you download torbrowser bundle the file is kept in ~/.torjail for future use so you don't have to 
 keep re-downloading the bundle. It also always checks the sha256sum of the file before extraction.

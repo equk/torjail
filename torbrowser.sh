@@ -14,6 +14,8 @@
 # The defaults install to ~/.torjail
 # It also executes dwm from within the sandboxed env.
 # If dwm is not found it will attempt to copy from /usr/bin/dwm
+#
+# License: MIT (LICENSE file should be included with script)
 #*****************************************************************
 # Notes: You may want to provide your own custom copiled dwm
 #*****************************************************************
