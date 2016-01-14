@@ -1,3 +1,5 @@
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
+
 # torjail
 
 Sandbox torbrowser using firejail, Xephyr & dwm
