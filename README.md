@@ -17,6 +17,10 @@ The default directory for install is ~/.torjail
 
 You can install the script wherever you want providing you keep the associated files.
 
+    06/02/2016 - Added commandline option to disable Xephyr
+
+You can now use -x to disable Xephyr + dwm
+
 **License:** MIT
 
 ## screenshot
@@ -47,9 +51,10 @@ Most useful variable is probably resolution & possibly display (depending on how
 ## todo
 
 * add option to clear session
-* add commandline options
+* ~~add commandline options~~
+* ~~add option to disable Xephyr~~
+* add option to disable ramdisk env
 
-I'm currently looking at the possibiltiy of adding commandline options to make ramdisk operation optional, select resolution at cli, make xephyr optional, custom base directory & use a different wm for xephyr session.
 
 ## removal
 
