@@ -15,6 +15,8 @@
 # It also executes dwm from within the sandboxed env.
 # If dwm is not found it will attempt to copy from /usr/bin/dwm
 #
+# 06/02/2016 - Added commandline option to disable Xephyr
+#
 # License: MIT (LICENSE file should be included with script)
 #*****************************************************************
 # Notes: You may want to provide your own custom copiled dwm
@@ -60,6 +62,21 @@ else
     TOR_DOWNLOAD=$TOR_32
 fi
 TOR_ASC="${TOR_DOWNLOAD}.asc"
+# commandline options
+# -x disables xephyr
+while getopts ":x" opt; do
+    case $opt in
+        x)
+            disable_xephyr="1"
+            echo -e "$cl_warn disabling Xephyr"
+            ;;
+        \?)
+            echo -e "$cl_error invalid option: -$OPTARG"
+            echo -e "$cl_warn valid options: -x (disables Xephyr)"
+            exit 1
+            ;;
+    esac
+done
 
 check_result(){
     if [ $1 -ne 0 ]; then
@@ -200,20 +217,29 @@ fi
 if [[ ! -e $TORJAIL_TMP ]]; then
     touch "$TORJAIL_TMP"
 fi
-# setup x vars
-touch "$TORJAIL_XAUTH"
-xauth -f "$TORJAIL_XAUTH" add "$TORJAIL_DISPLAY" . "`mcookie`"
-Xephyr -auth "$TORJAIL_XAUTH" -screen "$TORJAIL_RES" "$TORJAIL_DISPLAY" &
-TORJAIL_PID=$!
-DISPLAY="$TORJAIL_DISPLAY"
-XAUTHORITY="$TORJAIL_XAUTH"
 
-# execute sandboxed dwn env & application
-echo -e "$cl_ok starting session"
-firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- $TORJAIL_HOME/dwm &
-firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "$TORJAIL_HOME/start-tor-browser"
-# kill Xephyr
-kill $TORJAIL_PID
+# check if xephyr disable opt passed
+if [[ $disable_xephyr != 1 ]]; then
+    # setup x vars
+    touch "$TORJAIL_XAUTH"
+    xauth -f "$TORJAIL_XAUTH" add "$TORJAIL_DISPLAY" . "`mcookie`"
+    # start xephyr
+    Xephyr -auth "$TORJAIL_XAUTH" -screen "$TORJAIL_RES" "$TORJAIL_DISPLAY" &
+    TORJAIL_PID=$!
+    DISPLAY="$TORJAIL_DISPLAY"
+    XAUTHORITY="$TORJAIL_XAUTH"
+    # execute sandboxed dwn env & application
+    echo -e "$cl_ok starting session"
+    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- $TORJAIL_HOME/dwm &
+    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "$TORJAIL_HOME/start-tor-browser"
+    # kill Xephyr
+    kill $TORJAIL_PID
+else
+    # execute torjail without xephyr
+    echo -e "$cl_ok starting session without Xephyr"
+    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "$TORJAIL_HOME/start-tor-browser"
+fi
+
 # remove tmp file
 rm -- "$TORJAIL_TMP"
 echo -e "$cl_ok session finished ..."
