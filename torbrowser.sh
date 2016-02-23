@@ -230,14 +230,14 @@ if [[ $disable_xephyr != 1 ]]; then
     XAUTHORITY="$TORJAIL_XAUTH"
     # execute sandboxed dwn env & application
     echo -e "$cl_ok starting session"
-    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- $TORJAIL_HOME/dwm &
-    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "$TORJAIL_HOME/start-tor-browser"
+    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- ./dwm &
+    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "./start-tor-browser"
     # kill Xephyr
     kill $TORJAIL_PID
 else
     # execute torjail without xephyr
     echo -e "$cl_ok starting session without Xephyr"
-    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "$TORJAIL_HOME/start-tor-browser"
+    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "./start-tor-browser"
 fi
 
 # remove tmp file
