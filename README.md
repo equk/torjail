@@ -30,9 +30,9 @@ use -x to disable Xephyr + dwm
 
 ## changes 23/02/2016
 
-The script now runs a completely clean version of tor in tmpfs every time it is run.
-It also cleansup anything left on closing torbrowser.
-If it crashes, there is a check which cleans up anything left over.
+    The script now runs a completely clean version of tor in tmpfs every time it is run.
+    It also cleans up anything left on closing torbrowser.
+    If it crashes, there is a check which cleans up anything left over.
 
 ## variables
 

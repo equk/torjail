@@ -15,7 +15,9 @@
 # It also executes dwm from within the sandboxed env.
 # If dwm is not found it will attempt to copy from /usr/bin/dwm
 #
-# 06/02/2016 - Added commandline option to disable Xephyr
+# 06/02/2016 -  Added commandline option to disable Xephyr
+# 23/02/2016 -  Some functions changed to fix tmpfs problem caused
+#               by firejail removing private-home
 #
 # License: MIT (LICENSE file should be included with script)
 #*****************************************************************
