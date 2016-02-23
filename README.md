@@ -18,14 +18,21 @@ The default directory for install is ~/.torjail
 You can install the script wherever you want providing you keep the associated files.
 
     06/02/2016 - Added commandline option to disable Xephyr
+    23/02/2016 - Re-wrote some functions due to private-home being removed in firejail
 
-You can now use -x to disable Xephyr + dwm
+use -x to disable Xephyr + dwm
 
 **License:** MIT
 
 ## screenshot
 
 ![](https://raw.githubusercontent.com/equk/torjail/master/screenshot.jpg)
+
+## changes 23/02/2016
+
+The script now runs a completely clean version of tor in tmpfs every time it is run.
+It also cleansup anything left on closing torbrowser.
+If it crashes, there is a check which cleans up anything left over.
 
 ## variables
 
@@ -38,7 +45,7 @@ Most useful variable is probably resolution & possibly display (depending on how
 ## features
 
 * downloads torbrowser from torproject.org
-* sets up a working env
+* sets up a working env in tmpfs
 * runs tor in a sandbox
 * runs in /tmp/ so any changes are not saved
 * runs in its own xephyr dwm session
