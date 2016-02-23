@@ -30,9 +30,10 @@ TORJAIL_DISPLAY=":6"
 #   you probably don't need to change anything below this line
 #*****************************************************************
 TORJAIL="torbrowser"
-TORJAIL_HOME="${TORJAIL_BASE}/tor-browser_en-US/Browser"
 TORJAIL_XAUTH="/tmp/.Xauthority-$TORJAIL"
 TORJAIL_TMP="/tmp/.torxephyr"
+TORJAIL_RAM="/tmp/torjail"
+TORJAIL_HOME="${TORJAIL_RAM}/tor-browser_en-US/Browser"
 
 # download locations
 TOR_VER="5.5.2"
@@ -138,7 +139,8 @@ install() {
 
     rm sha.tmp
     echo -e "$cl_ok extracting torbrowser bundle"
-    tar -xJf $TOR_DOWNLOAD
+    mkdir $TORJAIL_RAM
+    tar -xJf $TOR_DOWNLOAD -C $TORJAIL_RAM
     echo $TOR_VER >> VER_INSTALLED
 }
 
@@ -150,6 +152,13 @@ fi
 # start with a banner showing version of script
 echo -e "$cl_ok starting torbrowser script"
 
+# check if tmpfs home exists
+if [[ -e $TORJAIL_RAM ]]; then
+    echo -e "$cl_warn torjail exists in tmpfs"
+    echo -e "$cl_ok removing $TORJAIL_RAM"
+    rm -r $TORJAIL_RAM
+fi
+
 # check version installed
 if [[ -e $TORJAIL_BASE/VER_INSTALLED ]]; then
     INSTALLED_VER=$(head -n 1 $TORJAIL_BASE/VER_INSTALLED)
@@ -158,27 +167,8 @@ if [[ -e $TORJAIL_BASE/VER_INSTALLED ]]; then
         update
     fi
 fi
-
-# check if torjail is installed
-if [[ ! -e $TORJAIL_HOME ]]; then
-    echo -e "$cl_error Unable to find torjail home"
-    echo -e "$cl_error Would you like to download & setup torbrowser [y/n]"
-    read answer
-    case $answer in
-        [Yy]*)
-            echo -e "$cl_ok setting up torjail"
-            install
-            ;;
-        [Nn]*)
-            echo -e "$cl_error exiting ..."
-            exit 1
-            ;;
-        *)
-            echo -e "$cl_error invalid input"
-            echo -e "$cl_error exiting ..."
-            exit 1
-    esac
-fi
+# run install
+install
 # make sure we are in script working directory
 cd $SCRIPT_PWD
 # check if xephyr instance of tor already running
@@ -242,4 +232,10 @@ fi
 
 # remove tmp file
 rm -- "$TORJAIL_TMP"
+# cleanup tmpfs
+if [[ -e $TORJAIL_RAM ]]; then
+    echo -e "$cl_ok cleaning up tmpfs"
+    echo -e "$cl_ok removing $TORJAIL_RAM"
+    rm -r $TORJAIL_RAM
+fi
 echo -e "$cl_ok session finished ..."
