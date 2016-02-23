@@ -113,3 +113,5 @@ on update
 
 Once you download torbrowser bundle the file is kept in ~/.torjail for future use so you don't have to 
 keep re-downloading the bundle. It also always checks the sha256sum of the file before extraction.
+
+firejail (0.9.38) - deprecated --private-home feature
