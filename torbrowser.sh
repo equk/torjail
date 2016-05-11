@@ -100,7 +100,7 @@ update() {
 }
 
 install() {
-    echo -e "$cl_ok creating torjail base folder at ~/.torjail"
+    echo -e "$cl_ok creating torjail base folder at ${TORJAIL_BASE}"
     mkdir -p $TORJAIL_BASE
     cd $TORJAIL_BASE
 
