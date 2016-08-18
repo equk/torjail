@@ -69,7 +69,7 @@ Remove this script & ~/.torjail
 
 ## script running
 
-    ./torbrowser.sh 
+    ./torbrowser.sh
     [ OK ] starting torbrowser script
     [ OK ] torbrowser version 5.0.6 found
     [ ERROR ] Unable to find torjail home
@@ -88,7 +88,7 @@ Remove this script & ~/.torjail
     uid         [ unknown] Tor Browser Developers (signing key) <torbrowser@torproject.org>
     sub   rsa4096/F65C2036 2014-12-15 [expires: 2017-08-25]
     sub   rsa4096/D40814E0 2014-12-15 [expires: 2017-08-25]
-    
+
     [ OK ] downloading checksums - sha256sums.txt
     ######################################################################## 100.0%
     [ OK ] downloading GPG asc - tor-browser-linux64-5.0.6_en-US.tar.xz.asc
@@ -110,15 +110,15 @@ Remove this script & ~/.torjail
 on update
 
     [ OK ] starting torbrowser script
-    [ OK ] torbrowser version 5.0.6 found
+    [ OK ] torbrowser version 6.0.3 found
     [ WARN ] torbrowser requires updating
-    [ WARN ] current ver: 5.0.6
-    [ WARN ] updating to: 5.0.7
+    [ WARN ] current ver: 6.0.3
+    [ WARN ] updating to: 6.0.4
     [ OK ] creating torjail base folder at ~/.torjail
 
 ## notes
 
-Once you download torbrowser bundle the file is kept in ~/.torjail for future use so you don't have to 
+Once you download torbrowser bundle the file is kept in ~/.torjail for future use so you don't have to
 keep re-downloading the bundle. It also always checks the sha256sum of the file before extraction.
 
 firejail (0.9.38) - deprecated --private-home feature
