@@ -10,7 +10,7 @@
 # xephyr     https://wiki.freedesktop.org/www/Software/Xephyr/
 # dwm        http://dwm.suckless.org/
 # torbrowser https://www.torproject.org/projects/torbrowser.html.en
-# 
+#
 # The defaults install to ~/.torjaila
 # It also executes dwm from within the sandboxed env.
 # If dwm is not found it will attempt to copy from /usr/bin/dwm
@@ -39,7 +39,7 @@ TORJAIL_RAM="/tmp/torjaila"
 TORJAIL_HOME="${TORJAIL_RAM}/tor-browser_en-US/Browser"
 
 # download locations
-TOR_VER="6.5a22"
+TOR_VER="6.5a2"
 TOR_MIRROR="https://dist.torproject.org/torbrowser/${TOR_VER}"
 TOR_X64="tor-browser-linux64-${TOR_VER}_en-US.tar.xz"
 TOR_32="tor-browser-linux32-${TOR_VER}_en-US.tar.xz"
