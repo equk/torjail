@@ -219,8 +219,8 @@ if [[ $disable_xephyr != 1 ]]; then
     # start xephyr
     Xephyr -auth "$TORJAIL_XAUTH" -screen "$TORJAIL_RES" "$TORJAIL_DISPLAY" &
     TORJAIL_PID=$!
-    DISPLAY="$TORJAIL_DISPLAY"
-    XAUTHORITY="$TORJAIL_XAUTH"
+    export DISPLAY="$TORJAIL_DISPLAY"
+    export XAUTHORITY="$TORJAIL_XAUTH"
     # execute sandboxed dwn env & application
     echo -e "$cl_ok starting session"
     firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- ./dwm &
