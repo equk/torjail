@@ -38,7 +38,7 @@ TORJAIL_RAM="/tmp/torjail"
 TORJAIL_HOME="${TORJAIL_RAM}/tor-browser_en-US/Browser"
 
 # download locations
-TOR_VER="6.0.5"
+TOR_VER="6.0.6"
 TOR_MIRROR="https://dist.torproject.org/torbrowser/${TOR_VER}"
 TOR_X64="tor-browser-linux64-${TOR_VER}_en-US.tar.xz"
 TOR_32="tor-browser-linux32-${TOR_VER}_en-US.tar.xz"
@@ -222,14 +222,14 @@ if [[ $disable_xephyr != 1 ]]; then
     export XAUTHORITY="$TORJAIL_XAUTH"
     # execute sandboxed dwn env & application
     echo -e "$cl_ok starting session"
-    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- ./dwm &
-    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "./start-tor-browser"
+    firejail --profile="$TORJAIL.profile" -- ./dwm &
+    firejail --profile="$TORJAIL.profile" -- "./start-tor-browser"
     # kill Xephyr
     kill $TORJAIL_PID
 else
     # execute torjail without xephyr
     echo -e "$cl_ok starting session without Xephyr"
-    firejail --profile="$TORJAIL.profile" --netfilter="$TORJAIL.filter" -- "./start-tor-browser"
+    firejail --profile="$TORJAIL.profile" -- "./start-tor-browser"
 fi
 
 # remove tmp file
