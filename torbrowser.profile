@@ -7,12 +7,17 @@
 include /etc/firejail/disable-programs.inc
 include /etc/firejail/disable-common.inc
 include /etc/firejail/disable-devel.inc
+include /etc/firejail/disable-passwdmgr.inc
 
 caps.drop all
-seccomp
-protocol unix,inet,inet6
 netfilter
+nogroups
+nonewprivs
 noroot
+protocol unix,inet,inet6
+seccomp
+shell none
+tracelog
 
 # blacklist
 blacklist /boot
@@ -25,4 +30,5 @@ blacklist /srv
 private /tmp/torjail/tor-browser_en-US/Browser
 private-etc fonts/
 private-dev
-private-bin bash,env,id,dirname,mkdir,ln,cp,sed,getconf,file,expr
+private-bin bash,grep,tail,env,gpg,id,readlink,dirname,test,mkdir,ln,sed,cp,rm,getconf
+private-tmp
