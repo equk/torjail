@@ -24,6 +24,25 @@ use -x to disable Xephyr + dwm
 
 **License:** MIT
 
+## why?
+
+A few references to why you should use a sandbox & xephyr
+
+torproject:
+
+    Wait, Firefox uses X11, isn't security basically hopeless?
+
+    If you want to attempt to mitigate this, the best options are:
+
+    Use a nested X11 implementation like Xephyr or Xpra.
+
+[@malwaretech](https://twitter.com/MalwareTechBlog/status/881838530934300672):
+
+    Firefox is still the only mainstream browser without a proper sandbox, so you are just swapping getting tracked for getting hacked.
+    3 Jul 2017
+
+![](https://raw.githubusercontent.com/equk/torjail/master/ffox_sandbox_mtech.png)
+
 ## screenshot
 
 ![](https://raw.githubusercontent.com/equk/torjail/master/screenshot.jpg)
