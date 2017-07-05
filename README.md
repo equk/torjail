@@ -47,12 +47,6 @@ torproject:
 
 ![](https://raw.githubusercontent.com/equk/torjail/master/screenshot.jpg)
 
-## changes 23/02/2016
-
-    The script now runs a completely clean version of tor in tmpfs every time it is run.
-    It also cleans up anything left on closing torbrowser.
-    If it crashes, there is a check which cleans up anything left over.
-
 ## variables
 
     TORJAIL_BASE="${HOME}/.torjail"
@@ -139,5 +133,3 @@ on update
 
 Once you download torbrowser bundle the file is kept in ~/.torjail for future use so you don't have to
 keep re-downloading the bundle. It also always checks the sha256sum of the file before extraction.
-
-firejail (0.9.38) - deprecated --private-home feature
