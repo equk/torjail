@@ -36,12 +36,10 @@ torproject:
 
     Use a nested X11 implementation like Xephyr or Xpra.
 
-[@malwaretech](https://twitter.com/MalwareTechBlog/status/881838530934300672):
+mozilla:
 
-    Firefox is still the only mainstream browser without a proper sandbox, so you are just swapping getting tracked for getting hacked.
-    3 Jul 2017
-
-![](https://raw.githubusercontent.com/equk/torjail/master/ffox_sandbox_mtech.png)
+    The one exception to the network policy, for now,
+    is the X11 protocol which is used to display graphics and receive keyboard/mouse input.
 
 ## screenshot
 
@@ -123,13 +121,19 @@ Remove this script & ~/.torjail
 on update
 
     [ OK ] starting torbrowser script
-    [ OK ] torbrowser version 6.0.3 found
+    [ OK ] torbrowser version 7.5.6 found
     [ WARN ] torbrowser requires updating
-    [ WARN ] current ver: 6.0.3
-    [ WARN ] updating to: 6.0.4
+    [ WARN ] current ver: 7.5.6
+    [ WARN ] updating to: 8.0
     [ OK ] creating torjail base folder at ~/.torjail
 
 ## notes
 
 Once you download torbrowser bundle the file is kept in ~/.torjail for future use so you don't have to
 keep re-downloading the bundle. It also always checks the sha256sum of the file before extraction.
+
+<details><summary>Mozilla References</summary>
+
+[Security/Sandbox - Mozilla Wiki](https://wiki.mozilla.org/Security/Sandbox)
+
+[Garf's blog: Linux sandboxing improvements in Firefox 60](https://www.morbo.org/2018/05/linux-sandboxing-improvements-in_10.html)</details>
