@@ -45,7 +45,7 @@ torproject:
 
 ## screenshot
 
-![](https://raw.githubusercontent.com/equk/torjail/master/screenshot.jpg)
+![](https://raw.githubusercontent.com/equk/torjail/master/screenshot.png)
 
 ## variables
 
