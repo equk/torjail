@@ -38,7 +38,7 @@ TORJAIL_RAM="/tmp/torjail"
 TORJAIL_HOME="${TORJAIL_RAM}/tor-browser_en-US/Browser"
 
 # download locations
-TOR_VER="8.5.4"
+TOR_VER="8.5.5"
 TOR_MIRROR="https://dist.torproject.org/torbrowser/${TOR_VER}"
 TOR_X64="tor-browser-linux64-${TOR_VER}_en-US.tar.xz"
 TOR_32="tor-browser-linux32-${TOR_VER}_en-US.tar.xz"
@@ -69,19 +69,19 @@ TOR_ASC="${TOR_DOWNLOAD}.asc"
 # -x disables xephyr
 while getopts ":x" opt; do
     case $opt in
-        x)
-            disable_xephyr="1"
-            echo -e "$cl_warn disabling Xephyr"
-            ;;
-        \?)
-            echo -e "$cl_error invalid option: -$OPTARG"
-            echo -e "$cl_warn valid options: -x (disables Xephyr)"
-            exit 1
-            ;;
+    x)
+        disable_xephyr="1"
+        echo -e "$cl_warn disabling Xephyr"
+        ;;
+    \?)
+        echo -e "$cl_error invalid option: -$OPTARG"
+        echo -e "$cl_warn valid options: -x (disables Xephyr)"
+        exit 1
+        ;;
     esac
 done
 
-check_result(){
+check_result() {
     if [ $1 -ne 0 ]; then
         echo -e "$cl_error checksum or gpg key did not match"
         echo -e "$cl_warn removing file"
@@ -131,7 +131,7 @@ install() {
         curl -OL# "${TOR_MIRROR}/${TOR_ASC}"
     fi
     echo -e "$cl_ok verifying files"
-    grep $TOR_DOWNLOAD sha256sums.txt > sha.tmp
+    grep $TOR_DOWNLOAD sha256sums.txt >sha.tmp
     shasum -c sha.tmp
     check_result $?
 
@@ -143,7 +143,7 @@ install() {
     echo -e "$cl_ok extracting torbrowser bundle"
     mkdir $TORJAIL_RAM
     tar -xJf $TOR_DOWNLOAD -C $TORJAIL_RAM
-    echo $TOR_VER >> VER_INSTALLED
+    echo $TOR_VER >>VER_INSTALLED
 }
 
 # Check for root ( quit if root :x )
@@ -179,17 +179,18 @@ if [[ -e $TORJAIL_TMP ]]; then
     echo -e "$cl_error would you like to continue? [y/n]"
     read answer
     case $answer in
-        [Yy]*)
-            echo -e "$cl_warn attempting to start session"
-            ;;
-        [Nn]*)
-            echo -e "$cl_error exiting ..."
-            exit 1
-            ;;
-        *)
-            echo -e "$cl_error invalid input"
-            echo -e "$cl_error exiting ..."
-            exit 1
+    [Yy]*)
+        echo -e "$cl_warn attempting to start session"
+        ;;
+    [Nn]*)
+        echo -e "$cl_error exiting ..."
+        exit 1
+        ;;
+    *)
+        echo -e "$cl_error invalid input"
+        echo -e "$cl_error exiting ..."
+        exit 1
+        ;;
     esac
 fi
 
@@ -214,7 +215,7 @@ fi
 if [[ $disable_xephyr != 1 ]]; then
     # setup x vars
     touch "$TORJAIL_XAUTH"
-    xauth -f "$TORJAIL_XAUTH" add "$TORJAIL_DISPLAY" . "`mcookie`"
+    xauth -f "$TORJAIL_XAUTH" add "$TORJAIL_DISPLAY" . "$(mcookie)"
     # start xephyr
     Xephyr -auth "$TORJAIL_XAUTH" -screen "$TORJAIL_RES" "$TORJAIL_DISPLAY" &
     TORJAIL_PID=$!
