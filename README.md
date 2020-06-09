@@ -17,10 +17,7 @@ The default directory for install is ~/.torjail
 
 You can install the script wherever you want providing you keep the associated files.
 
-    06/02/2016 - Added commandline option to disable Xephyr
-    23/02/2016 - Re-wrote some functions due to private-home being removed in firejail
-
-use -x to disable Xephyr + dwm
+use `-x` to disable Xephyr + dwm
 
 **License:** MIT
 
@@ -65,14 +62,6 @@ Most useful variable is probably resolution & possibly display (depending on how
 * stores everything in ~/.torjail
 * version checking & updating
 * gpg verification of downloads
-
-## todo
-
-* add option to clear session
-* ~~add commandline options~~
-* ~~add option to disable Xephyr~~
-* add option to disable ramdisk env
-
 
 ## removal
 
