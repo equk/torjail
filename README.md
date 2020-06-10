@@ -52,16 +52,16 @@ Most useful variable is probably resolution & possibly display (depending on how
 
 ## features
 
-* downloads torbrowser from torproject.org
-* sets up a working env in tmpfs
-* runs tor in a sandbox
-* runs in /tmp/ so any changes are not saved
-* runs in its own xephyr dwm session
-* has sha256 verification
-* works on 32bit & 64bit linux
-* stores everything in ~/.torjail
-* version checking & updating
-* gpg verification of downloads
+- [x] downloads torbrowser from torproject.org
+- [x] sets up a working env in tmpfs
+- [x] runs tor in a sandbox
+- [x] runs in /tmp/ so any changes are not saved
+- [x] runs in its own xephyr dwm session
+- [x] has sha256 verification
+- [x] works on 32bit & 64bit linux
+- [x] stores everything in ~/.torjail
+- [x] version checking & updating
+- [x] gpg verification of downloads
 
 ## removal
 
