@@ -199,13 +199,6 @@ if [[ -e $TORJAIL_XAUTH ]]; then
     rm -- "$TORJAIL_XAUTH"
 fi
 
-# copy dwm binary if it doesn't exist
-if [[ ! -e $TORJAIL_HOME/dwm ]]; then
-    echo -e "$cl_warn dwm does not exist in priv-home"
-    echo -e "$cl_warn copying dwm from /usr/bin/dwm"
-    cp /usr/bin/dwm $TORJAIL_HOME/dwm
-fi
-
 # create tmp file
 if [[ ! -e $TORJAIL_TMP ]]; then
     touch "$TORJAIL_TMP"
@@ -213,6 +206,12 @@ fi
 
 # check if xephyr disable opt passed
 if [[ $disable_xephyr != 1 ]]; then
+    # copy dwm binary if it doesn't exist
+    if [[ ! -e $TORJAIL_HOME/dwm ]]; then
+        echo -e "$cl_warn dwm does not exist in priv-home"
+        echo -e "$cl_warn copying dwm"
+        cp /usr/bin/dwm $TORJAIL_HOME/dwm
+    fi
     # setup x vars
     touch "$TORJAIL_XAUTH"
     xauth -f "$TORJAIL_XAUTH" add "$TORJAIL_DISPLAY" . "$(mcookie)"
