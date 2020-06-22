@@ -216,7 +216,7 @@ if [[ $disable_xephyr != 1 ]]; then
     if [[ ! -e $TORJAIL_HOME/dwm ]]; then
         echo -e "$cl_warn dwm does not exist in priv-home"
         echo -e "$cl_warn copying dwm"
-        cp /usr/bin/dwm $TORJAIL_HOME/dwm
+        cp $(command -v dwm) $TORJAIL_HOME/dwm
     fi
     # setup x vars
     touch "$TORJAIL_XAUTH"
