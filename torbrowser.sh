@@ -206,6 +206,12 @@ fi
 
 # check if xephyr disable opt passed
 if [[ $disable_xephyr != 1 ]]; then
+    # check if dwm installed
+    if ! [ -x "$(command -v dwm)" ]; then
+        echo -e "$cl_error dwm not installed"
+        echo -e "$cl_error exiting ..."
+        exit 1
+    fi
     # copy dwm binary if it doesn't exist
     if [[ ! -e $TORJAIL_HOME/dwm ]]; then
         echo -e "$cl_warn dwm does not exist in priv-home"
