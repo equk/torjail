@@ -84,9 +84,11 @@ done
 check_result() {
     if [ $1 -ne 0 ]; then
         echo -e "$cl_error checksum or gpg key did not match"
-        echo -e "$cl_warn removing file"
+        echo -e "$cl_warn removing files"
         rm $TOR_DOWNLOAD
-        echo -e "$cl_warn corrupt/invalid file removed - please restart torjail"
+        rm $TOR_SHA
+        rm sha.tmp
+        echo -e "$cl_warn corrupt/invalid files removed - please restart torjail"
         exit 1
     fi
 }
