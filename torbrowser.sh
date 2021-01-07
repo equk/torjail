@@ -143,7 +143,7 @@ install() {
 
     rm sha.tmp
     echo -e "$cl_ok extracting torbrowser bundle"
-    mkdir $TORJAIL_RAM
+    mkdir -p $TORJAIL_RAM
     tar -xJf $TOR_DOWNLOAD -C $TORJAIL_RAM
     echo $TOR_VER >>VER_INSTALLED
 }
