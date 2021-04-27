@@ -12,13 +12,20 @@
 # torbrowser https://www.torproject.org/projects/torbrowser.html.en
 #
 # The defaults install to ~/.torjail
-# It also executes dwm from within the sandboxed env.
-# If dwm is not found it will attempt to copy from /usr/bin/dwm
 #
-# 06/02/2016 -  Added commandline option to disable Xephyr
-# 23/02/2016 -  Some functions changed to fix tmpfs problem caused
-#               by firejail removing private-home
+# DWM Support
+# *** *******
 #
+# The script executes dwm from within the sandboxed env
+# On execution the script checks for dwm & will copy dwm from $PATH
+# This allows for a custom compiled dwm to be used
+#
+# Run Without DWM / Xephyr
+# *** ******* ***   ******
+#
+# You can run the script without dwm or xephyr by adding -x
+#
+#*****************************************************************
 # License: MIT (LICENSE file should be included with script)
 #*****************************************************************
 # Notes: You may want to provide your own custom copiled dwm
@@ -51,12 +58,15 @@ green="\033[1;32m"
 red="\033[1;31m"
 yellow="\033[1;33m"
 reset="\033[0m"
+
 # CLI feedback
 cl_error="[$red ERROR $reset]"
 cl_ok="[$green OK $reset]"
 cl_warn="[$yellow WARN $reset]"
+
 # get current path
 SCRIPT_PWD=$(pwd)
+
 # check architecture
 ARCH=$(getconf LONG_BIT)
 if [ "$ARCH" = "64" ]; then
@@ -65,8 +75,8 @@ else
     TOR_DOWNLOAD=$TOR_32
 fi
 TOR_ASC="${TOR_DOWNLOAD}.asc"
-# commandline options
-# -x disables xephyr
+
+# commandline options ( -x disables xephyr )
 while getopts ":x" opt; do
     case $opt in
     x)
@@ -153,7 +163,7 @@ if [ $(whoami) = "root" ]; then
     exit 1
 fi
 
-# start with a banner showing version of script
+# show cli feedback to show script starting
 echo -e "$cl_ok starting torbrowser script"
 
 # check if tmpfs home exists
@@ -163,19 +173,21 @@ if [[ -e $TORJAIL_RAM ]]; then
     rm -r $TORJAIL_RAM
 fi
 
-# check version installed
+# check version installed & update if required
 if [[ -e $TORJAIL_BASE/VER_INSTALLED ]]; then
     INSTALLED_VER=$(head -n 1 $TORJAIL_BASE/VER_INSTALLED)
     echo -e "$cl_ok torbrowser version ${INSTALLED_VER} found"
     if [[ "$INSTALLED_VER" != "$TOR_VER" ]]; then
         update
     fi
+else
+    install
 fi
-# run install
-install
+
 # make sure we are in script working directory
 cd $SCRIPT_PWD
-# check if xephyr instance of tor already running
+
+# check if xephyr instance of torjail already running
 if [[ -e $TORJAIL_TMP ]]; then
     echo -e "$cl_error another TORJAIL xephyr instance was detected"
     echo -e "$cl_error would you like to continue? [y/n]"
@@ -242,10 +254,13 @@ fi
 
 # remove tmp file
 rm -- "$TORJAIL_TMP"
+
 # cleanup tmpfs
 if [[ -e $TORJAIL_RAM ]]; then
     echo -e "$cl_ok cleaning up tmpfs"
     echo -e "$cl_ok removing $TORJAIL_RAM"
     rm -r $TORJAIL_RAM
 fi
+
+# session finished
 echo -e "$cl_ok session finished ..."
