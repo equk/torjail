@@ -218,6 +218,14 @@ if [[ ! -e $TORJAIL_TMP ]]; then
     touch "$TORJAIL_TMP"
 fi
 
+# create tmpfs home
+if [[ ! -e $TORJAIL_RAM ]]; then
+    echo -e "$cl_ok creating $TORJAIL_RAM"
+    mkdir -p $TORJAIL_RAM
+    echo -e "$cl_ok extracting torbrowser bundle"
+    tar -xJf $TORJAIL_BASE/$TOR_DOWNLOAD -C $TORJAIL_RAM
+fi
+
 # check if xephyr disable opt passed
 if [[ $disable_xephyr != 1 ]]; then
     # check if dwm installed
