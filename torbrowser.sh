@@ -119,7 +119,7 @@ install() {
     gpg --fingerprint ${TOR_GPG}
     if [ $? -ne 0 ]; then
         echo -e "$cl_ok Downloading PGP Public Key..."
-        gpg --keyserver pool.sks-keyservers.net --recv-keys ${TOR_GPG}
+        gpg --keyserver keys.openpgp.org --recv-keys ${TOR_GPG}
         gpg --fingerprint ${TOR_GPG}
         if [ $? -ne 0 ]; then
             echo -e "$cl_error Could not download PGP public key for verification"
