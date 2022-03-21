@@ -22,7 +22,7 @@ novideo
 protocol unix,inet,inet6
 seccomp !chroot
 shell none
-tracelog
+#tracelog
 
 # blacklist
 blacklist /boot
@@ -36,5 +36,5 @@ disable-mnt
 private /tmp/torjail/tor-browser_en-US/Browser
 private-etc fonts,hostname,hosts,resolv.conf,pki,ssl,ca-certificates,crypto-policies,alsa,asound.conf,pulse,machine-id,ld.so.cache
 private-dev
-private-bin bash,sh,grep,tail,env,gpg,id,readlink,dirname,test,mkdir,ln,sed,cp,rm,getconf
+private-bin bash,sh,grep,tail,env,gpg,id,readlink,dirname,test,mkdir,ln,sed,cp,rm,getconf,tor-browser,tor-browser-en,torbrowser-launcher
 private-tmp
