@@ -45,7 +45,7 @@ TORJAIL_RAM="/tmp/torjail"
 TORJAIL_HOME="${TORJAIL_RAM}/tor-browser_en-US/Browser"
 
 # download locations
-TOR_VER="11.0.11"
+TOR_VER="11.0.13"
 TOR_MIRROR="https://dist.torproject.org/torbrowser/${TOR_VER}"
 TOR_X64="tor-browser-linux64-${TOR_VER}_en-US.tar.xz"
 TOR_32="tor-browser-linux32-${TOR_VER}_en-US.tar.xz"
