@@ -42,13 +42,13 @@ TORJAIL="torbrowser"
 TORJAIL_XAUTH="/tmp/.Xauthority-$TORJAIL"
 TORJAIL_TMP="/tmp/.torxephyr"
 TORJAIL_RAM="/tmp/torjail"
-TORJAIL_HOME="${TORJAIL_RAM}/tor-browser_en-US/Browser"
+TORJAIL_HOME="${TORJAIL_RAM}/tor-browser/Browser"
 
 # download locations
-TOR_VER="11.5.7"
+TOR_VER="12.0.0"
 TOR_MIRROR="https://dist.torproject.org/torbrowser/${TOR_VER}"
-TOR_X64="tor-browser-linux64-${TOR_VER}_en-US.tar.xz"
-TOR_32="tor-browser-linux32-${TOR_VER}_en-US.tar.xz"
+TOR_X64="tor-browser-linux64-${TOR_VER}_ALL.tar.xz"
+TOR_32="tor-browser-linux32-${TOR_VER}_ALL.tar.xz"
 TOR_SHA="sha256sums.txt"
 TOR_GPG="0x4E2C6E8793298290"
 
