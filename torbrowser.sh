@@ -45,11 +45,11 @@ TORJAIL_RAM="/tmp/torjail"
 TORJAIL_HOME="${TORJAIL_RAM}/tor-browser/Browser"
 
 # download locations
-TOR_VER="12.0.1"
+TOR_VER="13.0.8"
 TOR_MIRROR="https://dist.torproject.org/torbrowser/${TOR_VER}"
-TOR_X64="tor-browser-linux64-${TOR_VER}_ALL.tar.xz"
-TOR_32="tor-browser-linux32-${TOR_VER}_ALL.tar.xz"
-TOR_SHA="sha256sums.txt"
+TOR_X64="tor-browser-linux-x86_64-${TOR_VER}.tar.xz"
+TOR_32="tor-browser-linux-i686-${TOR_VER}.tar.xz"
+TOR_SHA="sha256sums-signed-build.txt"
 TOR_GPG="0x4E2C6E8793298290"
 
 # color / colour
@@ -143,7 +143,7 @@ install() {
         curl -OL# "${TOR_MIRROR}/${TOR_ASC}"
     fi
     echo -e "$cl_ok verifying files"
-    grep $TOR_DOWNLOAD sha256sums.txt >sha.tmp
+    grep $TOR_DOWNLOAD $TOR_SHA >sha.tmp
     shasum -c sha.tmp
     check_result $?
 
@@ -250,14 +250,14 @@ if [[ $disable_xephyr != 1 ]]; then
     export XAUTHORITY="$TORJAIL_XAUTH"
     # execute sandboxed dwn env & application
     echo -e "$cl_ok starting session"
-    firejail --profile="$TORJAIL.profile" -- ./dwm &
-    firejail --profile="$TORJAIL.profile" -- "./start-tor-browser"
+    firejail --profile="$TORJAIL.profile" ./dwm &
+    firejail --profile="$TORJAIL.profile" "./start-tor-browser"
     # kill Xephyr
     kill $TORJAIL_PID
 else
     # execute torjail without xephyr
     echo -e "$cl_ok starting session without Xephyr"
-    firejail --profile="$TORJAIL.profile" -- "./start-tor-browser"
+    firejail --profile="$TORJAIL.profile" "./start-tor-browser"
 fi
 
 # remove tmp file
