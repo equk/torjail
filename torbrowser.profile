@@ -9,6 +9,11 @@ include /etc/firejail/disable-common.inc
 include /etc/firejail/disable-devel.inc
 include /etc/firejail/disable-interpreters.inc
 
+include /etc/firejail/whitelist-common.inc
+include /etc/firejail/whitelist-var-common.inc
+include /etc/firejail/whitelist-runuser-common.inc
+include /etc/firejail/whitelist-usr-share-common.inc
+
 caps.drop all
 netfilter
 nogroups
@@ -21,7 +26,7 @@ nou2f
 novideo
 protocol unix,inet,inet6
 seccomp !chroot
-shell none
+#shell none
 #tracelog
 
 # blacklist
@@ -33,8 +38,8 @@ blacklist /srv
 disable-mnt
 # extended sandbox for torbrowser
 # note: any changes will not be saved
-private /tmp/torjail/tor-browser_en-US/Browser
-private-etc fonts,hostname,hosts,resolv.conf,pki,ssl,ca-certificates,crypto-policies,alsa,asound.conf,pulse,machine-id,ld.so.cache
+private /tmp/torjail/tor-browser/Browser
+private-etc alsa,alternatives,asound.conf,ca-certificates,crypto-policies,fonts,ld.so.cache,ld.so.conf,ld.so.conf.d,ld.so.preload,machine-id,pki,pulse,resolv.conf,ssl
 private-dev
-private-bin bash,sh,grep,tail,env,gpg,id,readlink,dirname,test,mkdir,ln,sed,cp,rm,getconf,tor-browser,tor-browser-en,torbrowser-launcher
+private-bin bash,cat,cp,cut,dirname,env,expr,file,gpg,grep,gxmessage,id,kdialog,ln,mkdir,mv,python*,rm,sed,sh,tail,tar,tclsh,test,tor-browser,tor-browser-en,torbrowser-launcher,update-desktop-database,xmessage,xz,zenity
 private-tmp
